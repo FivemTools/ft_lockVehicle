@@ -26,3 +26,5 @@ Example:
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
+
+* Deediezi [locksystem](https://forum.fivem.net/t/release-locksystem-v2-0-3-updated-the-07-03-at-11pm/17750)
