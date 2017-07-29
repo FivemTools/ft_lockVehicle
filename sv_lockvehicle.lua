@@ -18,7 +18,7 @@ end
 
 ---------------------Special event to generate a unique number plate---------------------
 RegisterServerEvent("ft_lockvehicle:SvPlateGenerator")
-AddEventHandler("ft_lockvehicle:SvPlateGenerator" function()
+AddEventHandler("ft_lockvehicle:SvPlateGenerator", function()
   
   local plate = GenerateUniquePlate(8)
   local platefound = false
@@ -39,7 +39,7 @@ end)
 
 ---------------------Add and remove function---------------------
 RegisterServerEvent("ft_lockvehicle:SvAddVehicle")
-AddEventHandler("ft_lockvehicle:SvAddVehicle" function(plate)
+AddEventHandler("ft_lockvehicle:SvAddVehicle", function(plate)
   local steamId = GetPlayerIdentifiers(source)[1]
   local name = GetPlayerName(source)
   table.insert(VehicleDatabase, {plate=plate, ownername=name, owner=steamId})     
@@ -53,7 +53,7 @@ AddEventHandler("ft_lockvehicle:SvAddVehicleTarget" function(target, plate)
 end)
 
 RegisterServerEvent("ft_lockvehicle:SvRemoveVehicle")
-AddEventHandler("ft_lockvehicle:SvRemoveVehicle" function(plate)
+AddEventHandler("ft_lockvehicle:SvRemoveVehicle", function(plate)
   local steamId = GetPlayerIdentifiers(source)[1]
   for k,vehicle in pairs(VehicleDatabase) do
     if vehicle.plate == plate and vehicle.owner == steamId then
@@ -64,7 +64,7 @@ AddEventHandler("ft_lockvehicle:SvRemoveVehicle" function(plate)
 end)
 
 RegisterServerEvent("ft_lockvehicle:SvRemoveVehicleTarget")
-AddEventHandler("ft_lockvehicle:SvRemoveVehicleTarget" function(target, plate)
+AddEventHandler("ft_lockvehicle:SvRemoveVehicleTarget", function(target, plate)
   local steamId = GetPlayerIdentifiers(target)[1]
   for k,vehicle in pairs(VehicleDatabase) do
     if vehicle.plate == plate and vehicle.owner == steamId then
@@ -75,7 +75,7 @@ AddEventHandler("ft_lockvehicle:SvRemoveVehicleTarget" function(target, plate)
 end)
 ---------------------LSPD Functions---------------------
 RegisterServerEvent("ft_lockvehicle:SvLSPDCheckVehicleOwner")
-AddEventHandler("ft_lockvehicle:SvLSPDCheckVehicleOwner" function(plate)
+AddEventHandler("ft_lockvehicle:SvLSPDCheckVehicleOwner", function(plate)
   local result = false
   for _,vehicle in pairs(VehicleDatabase) do
     if vehicle.plate == plate then
@@ -91,20 +91,16 @@ end)
 
 ---------------------Check if the player is owner---------------------
 RegisterServerEvent("ft_lockvehicle:SvLockStatus")
-AddEventHandler("ft_lockvehicle:SvLockStatus" function(veh, plate)
+AddEventHandler("ft_lockvehicle:SvLockStatus", function(veh, plate)
   local steamId = GetPlayerIdentifiers(source)[1]
-  -- local result = false
   
   for _,vehicle in pairs(VehicleDatabase) do
     if vehicle.plate == plate then
       if vehicle.owner == steamId then
-        result = true
         TriggerClientEvent('ft_lockvehicle:ClLockStatus', source, veh)
         break
       end
     end
   end
-  -- if not result then
-    -- TriggerClientEvent('ft_ui:ClNotification', source, "Vous n'avez pas les clés de ce véhicule.")
-  -- end
+  
 end)
