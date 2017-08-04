@@ -46,7 +46,7 @@ AddEventHandler("ft_lockvehicle:SvAddVehicle", function(plate)
 end)
 
 RegisterServerEvent("ft_lockvehicle:SvAddVehicleTarget")
-AddEventHandler("ft_lockvehicle:SvAddVehicleTarget" function(target, plate)
+AddEventHandler("ft_lockvehicle:SvAddVehicleTarget", function(target, plate)
   local steamId = GetPlayerIdentifiers(target)[1]
   local name = GetPlayerName(target)
   table.insert(VehicleDatabase, {plate=plate, ownername=name, owner=steamId})     
